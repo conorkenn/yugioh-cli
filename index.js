@@ -1,14 +1,18 @@
 import fetch from 'node-fetch';
-import readlineSync from  'readline-sync';
 
-const cardName = readlineSync.question("Enter Card Name: ")
+const args = process.argv.slice(2);
+const cardName = args.toString().replace(',', " ");
 
-var url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?name=' + cardName
+var url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?name=' + cardName;
 
 fetch(url)
 .then(response =>response.json())
 .then((cardData) => {
   var data = cardData.data['0']
+  console.log('\n')
   console.log(data.name)
+  console.log(data.type)
   console.log(data.desc)
-})
+  console.log('atk: ' + data.atk)
+  console.log('def: ' + data.atk)
+});
